@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  v2ray:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+    restart: unless-stopped
+    container_name: v2ray-proxy
+    volumes:
+      - ./logs:/var/log/v2ray
+    networks:
+      - v2ray-net
+
+networks:
+  v2ray-net:
+    driver: bridge
