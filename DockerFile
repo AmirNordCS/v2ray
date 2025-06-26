@@ -1,0 +1,16 @@
+# Use the official V2Ray image from the V2Fly project
+FROM v2fly/v2fly-core:latest
+
+# LABELs for metadata (optional, but good practice)
+LABEL maintainer="Your Name"
+LABEL description="V2Ray proxy server deployed on Render."
+
+# The v2fly/v2fly-core image is already configured to look for
+# /etc/v2ray/config.json and run V2Ray.
+# All we need to do is ensure our config file is in place.
+# We will copy a placeholder here and use Render's Secret Files
+# to provide the real one in production.
+COPY config.json /etc/v2ray/config.json
+
+# The base image already has the correct CMD and EXPOSE instructions,
+# so we don't need to specify them again. It will run V2Ray by default.
