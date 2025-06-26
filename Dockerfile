@@ -18,5 +18,6 @@ RUN chmod +x /usr/local/bin/start.sh
 # Expose port (Render will provide the actual port via PORT env var)
 EXPOSE 8080
 
-# Use our startup script
-CMD ["/usr/local/bin/start.sh"] 
+# Override the base image's entrypoint and use our startup script
+ENTRYPOINT []
+CMD ["/bin/sh", "/usr/local/bin/start.sh"] 

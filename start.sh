@@ -9,5 +9,10 @@ echo "Starting V2Ray on port: $PORT"
 jq --arg port "$PORT" '.inbounds[0].port = ($port | tonumber)' /etc/v2ray/config.json > /tmp/config.json
 mv /tmp/config.json /etc/v2ray/config.json
 
+# Display the final configuration for debugging
+echo "Final V2Ray configuration:"
+cat /etc/v2ray/config.json
+
 # Start V2Ray
-exec /usr/bin/v2ray run -config /etc/v2ray/config.json 
+echo "Starting V2Ray..."
+exec v2ray run -config /etc/v2ray/config.json 
