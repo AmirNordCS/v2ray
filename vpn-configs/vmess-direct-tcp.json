@@ -1,6 +1,6 @@
 {
   "v": "2",
-  "ps": "VMess-Direct-94.130.107.116",
+  "ps": "VMess-Direct-TCP-94.130.107.116",
   "add": "94.130.107.116",
   "port": "8080",
   "id": "99887766-5544-3322-1100-aabbccddeeff",
@@ -10,7 +10,7 @@
   "type": "http",
   "host": "www.netflix.com",
   "path": "",
-  "tls": "",
+  "tls": "none",
   "sni": "",
   "alpn": "",
   "fp": ""

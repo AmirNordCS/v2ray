@@ -1,137 +1,181 @@
-# 🔧 TROUBLESHOOTING GUIDE - Fixing TLS Errors
+# 🔧 TROUBLESHOOTING GUIDE - Direct Port Setup
 
-## ❌ **Problem**: "tls: first record does not look like a TLS handshake"
+## ✅ **Simplified Setup - No More Nginx Issues!**
 
-This error means your client is trying to use HTTPS/TLS but your server is running HTTP only.
+With the new direct port setup, most connection issues are eliminated! Each protocol now runs on its own dedicated port.
 
-## ✅ **SOLUTION**: Use the FIXED configurations
+## 🎯 **Testing Order (Start Here!)**
 
-### **Step 1: Use Fixed Configurations**
+### **1. VMess Direct TCP (Port 8080) - PROVEN WORKING** ✅
 
-Use these files instead of the original ones:
+**This connection is confirmed working at 115ms ping!**
 
-- `vmess-google-ws-fixed.json` ← **Start with this one**
-- `vmess-direct-tcp-fixed.json` ← **Try this if WebSocket fails**
-- `vless-websocket-fixed.json`
-
-### **Step 2: Quick Test Links**
-
-**Copy and import these corrected links:**
-
-**VMess Direct TCP (Simplest - Try First):**
+**Quick Test Link:**
 
 ```
-vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtRGlyZWN0LVRDUC05NC4xMzAuMTA3LjExNiIsImFkZCI6Ijk0LjEzMC4xMDcuMTE2IiwicG9ydCI6IjgwODAiLCJpZCI6Ijk5ODg3NzY2LTU1NDQtMzMyMi0xMTAwLWFhYmJjY2RkZWVmZiIsImFpZCI6IjAiLCJzY3kiOiJhdXRvIiwibmV0IjoidGNwIiwidHlwZSI6Imh0dHAiLCJob3N0Ijoid3d3Lm5ldGZsaXguY29tIiwicGF0aCI6IiIsInRscyI6Im5vbmUiLCJzbmkiOiIiLCJhbHBuIjoiIiwiZnAiOiIiLCJhbGxvd0luc2VjdXJlIjoxfQ==
+vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtRGlyZWN0LVRDUC05NC4xMzAuMTA3LjExNiIsImFkZCI6Ijk0LjEzMC4xMDcuMTE2IiwicG9ydCI6IjgwODAiLCJpZCI6Ijk5ODg3NzY2LTU1NDQtMzMyMi0xMTAwLWFhYmJjY2RkZWVmZiIsImFpZCI6IjAiLCJzY3kiOiJhdXRvIiwibmV0IjoidGNwIiwidHlwZSI6Imh0dHAiLCJob3N0Ijoid3d3Lm5ldGZsaXguY29tIiwicGF0aCI6IiIsInRscyI6Im5vbmUiLCJzbmkiOiIiLCJhbHBuIjoiIn0=
 ```
 
-**VMess Google WebSocket (After TCP works):**
+### **2. VMess Google WebSocket (Port 8001)**
+
+**If TCP works, try this next:**
 
 ```
-vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtR29vZ2xlLUhUVFAtOTQuMTMwLjEwNy4xMTYiLCJhZGQiOiI5NC4xMzAuMTA3LjExNiIsInBvcnQiOiI4MCIsImlkIjoiZDAzMDY0NjgtZTUwMC00MTkzLTk1ZWYtYTUxNGIzMzk2YzkwIiwiYWlkIjoiMCIsInNjeSI6ImF1dG8iLCJuZXQiOiJ3cyIsInR5cGUiOiJub25lIiwiaG9zdCI6Ind3dy5nb29nbGUuY29tIiwicGF0aCI6Ii92bWVzcy1nb29nbGUiLCJ0bHMiOiJub25lIiwic25pIjoiIiwiYWxwbiI6IiIsImZwIjoiIiwiYWxsb3dJbnNlY3VyZSI6MX0=
+vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtR29vZ2xlLVdTLTk0LjEzMC4xMDcuMTE2IiwiYWRkIjoiOTQuMTMwLjEwNy4xMTYiLCJwb3J0IjoiODAwMSIsImlkIjoiZDAzMDY0NjgtZTUwMC00MTkzLTk1ZWYtYTUxNGIzMzk2YzkwIiwiYWlkIjoiMCIsInNjeSI6ImF1dG8iLCJuZXQiOiJ3cyIsInR5cGUiOiJub25lIiwiaG9zdCI6Ind3dy5nb29nbGUuY29tIiwicGF0aCI6Ii8iLCJ0bHMiOiJub25lIiwic25pIjoiIiwiYWxwbiI6IiJ9
 ```
 
-## 🔧 **Client Settings to Check**
+### **3. Other Protocols**
+
+If the first two work, try:
+
+- **VLESS WebSocket** (Port 8003)
+- **VMess Cloudflare WebSocket** (Port 8002)
+- **Trojan WebSocket** (Port 8005)
+
+## 🔍 **If VMess Direct TCP (8080) Fails:**
+
+### **Check Server Status:**
+
+```bash
+# SSH into your VPS and run:
+docker-compose ps
+docker-compose logs xray
+netstat -tlnp | grep :8080
+```
+
+### **Common Issues:**
+
+1. **Xray container not running:** `docker-compose restart xray`
+2. **Port blocked:** `ufw allow 8080`
+3. **Wrong UUID:** Check if you're using `99887766-5544-3322-1100-aabbccddeeff`
+
+## 🔍 **If WebSocket Protocols (8001, 8002, 8003, 8005) Fail:**
+
+### **Check All Ports:**
+
+```bash
+# Check if all ports are listening:
+netstat -tlnp | grep ":8001\|:8002\|:8003\|:8005\|:8080"
+```
+
+### **Expected Output:**
+
+```
+tcp6  0  0  :::8001  :::*  LISTEN
+tcp6  0  0  :::8002  :::*  LISTEN
+tcp6  0  0  :::8003  :::*  LISTEN
+tcp6  0  0  :::8005  :::*  LISTEN
+tcp6  0  0  :::8080  :::*  LISTEN
+```
+
+## ⚙️ **Client Configuration Tips**
 
 ### **V2RayN (Windows):**
 
-1. **TLS:** Set to "none" or disable
-2. **allowInsecure:** Enable/Check
-3. **Skip Certificate Verification:** Enable
+- **TLS:** None/Disable
+- **Allow Insecure:** ✅ Enable
+- **Network:** TCP (for 8080) or WebSocket (for others)
 
 ### **V2RayNG (Android):**
 
-1. **Security:** Set to "none"
-2. **Allow Insecure:** Enable
-3. **TLS:** Disable
+- **Security:** none
+- **Allow Insecure:** ✅ Enable
+- **TLS:** Disable
 
-### **General Settings:**
+### **All Clients:**
 
-- **Server:** 94.130.107.116
-- **Port:** 8080 (for direct) or 80 (for WebSocket)
-- **TLS/SSL:** DISABLE
-- **Certificate Verification:** SKIP/DISABLE
+- **Server IP:** 94.130.107.116
+- **Encryption:** auto or aes-128-gcm
+- **TLS/SSL:** ❌ **DISABLE** (Very Important!)
 
-## 🎯 **Testing Order:**
+## 🚨 **Emergency Manual Setup (V2RayN)**
 
-### **1. Test VMess Direct TCP First** (Port 8080)
+If import fails, configure manually:
 
-- This bypasses Nginx completely
-- Simplest configuration
-- If this doesn't work, there's a server issue
+### **VMess Direct TCP (Working Configuration):**
 
-### **2. Then Test VMess WebSocket** (Port 80)
+1. **Address:** 94.130.107.116
+2. **Port:** 8080
+3. **UUID:** 99887766-5544-3322-1100-aabbccddeeff
+4. **AlterId:** 0
+5. **Security:** auto
+6. **Network:** tcp
+7. **Header Type:** http
+8. **HTTP Host:** www.netflix.com
+9. **TLS:** ❌ NONE/Disable
 
-- Goes through Nginx
-- More complex but better disguised
+### **VMess Google WebSocket:**
 
-### **3. Check Server Status**
+1. **Address:** 94.130.107.116
+2. **Port:** 8001
+3. **UUID:** d0306468-e500-4193-95ef-a514b3396c90
+4. **AlterId:** 0
+5. **Network:** ws
+6. **WebSocket Path:** /
+7. **WebSocket Host:** www.google.com
+8. **TLS:** ❌ NONE/Disable
 
-Before testing, verify your server:
+## 🔧 **Server Management Commands**
 
-```bash
-# In your VPS terminal:
-docker-compose -f docker-compose-ip.yml ps
-curl -I http://localhost:80
-curl -I http://localhost:8080
-```
-
-## 🔍 **Diagnosis Steps:**
-
-### **If VMess Direct TCP (8080) Fails:**
-
-- Server Xray not running
-- Port 8080 blocked by firewall
-- Wrong UUID
-
-### **If VMess WebSocket (80) Fails but TCP Works:**
-
-- Nginx configuration issue
-- WebSocket path wrong
-- Host header issue
-
-### **If Both Fail:**
-
-- Server not running: `docker-compose -f docker-compose-ip.yml up -d`
-- Firewall blocking: `ufw allow 80 && ufw allow 8080`
-- Wrong server IP
-
-## ⚡ **Quick Fix Commands for VPS:**
+### **Check Everything:**
 
 ```bash
-# Restart services
-docker-compose -f docker-compose-ip.yml restart
+# Service status
+docker-compose ps
 
-# Check logs
-docker-compose -f docker-compose-ip.yml logs -f
+# View logs
+docker-compose logs -f
 
-# Check ports
-netstat -tlnp | grep -E ':(80|8080) '
+# Restart everything
+docker-compose restart
 
-# Test local connectivity
-curl http://localhost:80
-telnet localhost 8080
+# Check port usage
+netstat -tlnp | grep -E ":(8080|8001|8002|8003|8005)"
 ```
 
-## 🚨 **Emergency: Manual V2RayN Setup**
+### **Full Restart:**
 
-If import fails, set up manually in V2RayN:
+```bash
+# Stop everything
+docker-compose down
 
-1. **Add VMess Server**
-2. **Address:** 94.130.107.116
-3. **Port:** 8080
-4. **UUID:** 99887766-5544-3322-1100-aabbccddeeff
-5. **AlterId:** 0
-6. **Security:** auto
-7. **Network:** tcp
-8. **Header Type:** http
-9. **HTTP Host:** www.netflix.com
-10. **TLS:** NONE/Disable
+# Start everything
+docker-compose up -d
 
-## 📞 **Still Not Working?**
+# Wait 10 seconds, then check
+sleep 10 && docker-compose ps
+```
 
-1. **Check server:** Visit http://94.130.107.116 (should show website)
-2. **Ping test:** `ping 94.130.107.116`
-3. **Port test:** Use online port checker for ports 80, 8080
-4. **Try different client:** Test with another V2Ray app
+## 📊 **Port Status Reference**
 
-**Expected result:** Connection should work with 50-200ms ping to Germany (Hetzner).
+| Port | Protocol            | Status         | Notes                |
+| ---- | ------------------- | -------------- | -------------------- |
+| 8080 | VMess TCP           | ✅ **Working** | 115ms ping confirmed |
+| 8001 | VMess WS Google     | 🔄 Test needed | Direct Xray port     |
+| 8002 | VMess WS Cloudflare | 🔄 Test needed | Direct Xray port     |
+| 8003 | VLESS WebSocket     | 🔄 Test needed | Direct Xray port     |
+| 8005 | Trojan WebSocket    | 🔄 Test needed | Direct Xray port     |
+
+## ✨ **Benefits of New Setup**
+
+- ✅ **No nginx complications**
+- ✅ **No path routing issues**
+- ✅ **Direct container connections**
+- ✅ **Easier debugging**
+- ✅ **One working connection confirmed**
+
+## 📞 **Still Need Help?**
+
+### **Quick Tests:**
+
+1. **Ping server:** `ping 94.130.107.116`
+2. **Test VMess TCP first:** Use the confirmed working config
+3. **Check VPS status:** SSH and run `docker-compose ps`
+
+### **Expected Results:**
+
+- **VMess Direct TCP:** Should work immediately (115ms ping)
+- **WebSocket protocols:** Should work but may need testing
+- **Connection speed:** 50-200ms to Germany (Hetzner location)
+
+**Remember: Start with VMess Direct TCP (port 8080) - it's proven working!** 🚀

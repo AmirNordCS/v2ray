@@ -1,19 +1,39 @@
 version: "3.8"
 
 services:
-  v2ray:
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      - PORT=8080
+  xray:
+    image: teddysun/xray:latest
+    container_name: xray-proxy
     restart: unless-stopped
-    container_name: v2ray-proxy
+    ports:
+      - "8080:8080" # VMess Direct TCP
+      - "8001:8001" # VMess WebSocket Google
+      - "8002:8002" # VMess WebSocket Cloudflare
+      - "8003:8003" # VLESS WebSocket
+      - "8005:8005" # Trojan WebSocket
     volumes:
-      - ./logs:/var/log/v2ray
+      - ./xray-config.json:/etc/xray/config.json:ro
+      - ./logs:/var/log/xray
+      - /etc/localtime:/etc/localtime:ro
     networks:
-      - v2ray-net
+      - proxy-network
+    command: ["xray", "run", "-config", "/etc/xray/config.json"]
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower-updater
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_SCHEDULE=0 0 4 * * *
+    networks:
+      - proxy-network
 
 networks:
-  v2ray-net:
+  proxy-network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
