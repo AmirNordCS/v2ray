@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  xray:
+    image: teddysun/xray:latest
+    container_name: xray-proxy
+    restart: unless-stopped
+    volumes:
+      - ./xray-config-no-ssl.json:/etc/xray/config.json:ro
+      - ./logs:/var/log/xray
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - proxy-network
+    command: ["xray", "run", "-config", "/etc/xray/config.json"]
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - ./nginx-no-ssl.conf:/etc/nginx/nginx.conf:ro
+      - ./html:/var/www/html:ro
+      - ./logs:/var/log/nginx
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - proxy-network
+    depends_on:
+      - xray
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower-updater
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_SCHEDULE=0 0 4 * * *
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
