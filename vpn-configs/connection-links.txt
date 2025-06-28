@@ -1,0 +1,26 @@
+# VPN Connection Links for 94.130.107.116
+# Copy these links and import them into your V2Ray client
+
+## VMess Connections
+
+# VMess Google WebSocket
+vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtR29vZ2xlLTk0LjEzMC4xMDcuMTE2IiwiYWRkIjoiOTQuMTMwLjEwNy4xMTYiLCJwb3J0IjoiODAiLCJpZCI6ImQwMzA2NDY4LWU1MDAtNDE5My05NWVmLWE1MTRiMzM5NmM5MCIsImFpZCI6IjAiLCJzY3kiOiJhdXRvIiwibmV0Ijoid3MiLCJ0eXBlIjoibm9uZSIsImhvc3QiOiJ3d3cuZ29vZ2xlLmNvbSIsInBhdGgiOiIvdm1lc3MtZ29vZ2xlIiwidGxzIjoiIiwic25pIjoiIiwiYWxwbiI6IiIsImZwIjoiIn0=
+
+# VMess Cloudflare WebSocket
+vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtQ2xvdWRmbGFyZS05NC4xMzAuMTA3LjExNiIsImFkZCI6Ijk0LjEzMC4xMDcuMTE2IiwicG9ydCI6IjgwIiwiaWQiOiJhMWIyYzNkNC1lNWY2LTc4OTAtYWJjZC1lZjEyMzQ1Njc4OTAiLCJhaWQiOiIwIiwic2N5IjoiYXV0byIsIm5ldCI6IndzIiwidHlwZSI6Im5vbmUiLCJob3N0Ijoid3d3LmNsb3VkZmxhcmUuY29tIiwicGF0aCI6Ii92bWVzcy1jZiIsInRscyI6IiIsInNuaSI6IiIsImFscG4iOiIiLCJmcCI6IiJ9
+
+# VMess Direct TCP
+vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtRGlyZWN0LTk0LjEzMC4xMDcuMTE2IiwiYWRkIjoiOTQuMTMwLjEwNy4xMTYiLCJwb3J0IjoiODA4MCIsImlkIjoiOTk4ODc3NjYtNTU0NC0zMzIyLTExMDAtYWFiYmNjZGRlZWZmIiwiYWlkIjoiMCIsInNjeSI6ImF1dG8iLCJuZXQiOiJ0Y3AiLCJ0eXBlIjoiaHR0cCIsImhvc3QiOiJ3d3cubmV0ZmxpeC5jb20iLCJwYXRoIjoiIiwidGxzIjoiIiwic25pIjoiIiwiYWxwbiI6IiIsImZwIjoiIn0=
+
+## VLESS Connections
+
+# VLESS WebSocket
+vless://f1e2d3c4-b5a6-9780-cdef-123456789abc@94.130.107.116:80?type=ws&host=www.microsoft.com&path=/vless-ws#VLESS-WebSocket-94.130.107.116
+
+# VLESS gRPC
+vless://12345678-abcd-ef12-3456-789abcdef012@94.130.107.116:80?type=grpc&serviceName=vless-grpc#VLESS-gRPC-94.130.107.116
+
+## Trojan Connection
+
+# Trojan WebSocket
+trojan://your-strong-trojan-password-123@94.130.107.116:80?type=ws&host=www.github.com&path=/trojan-ws#Trojan-WebSocket-94.130.107.116 

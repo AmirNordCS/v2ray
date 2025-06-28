@@ -1,0 +1,17 @@
+{
+  "v": "2",
+  "ps": "VMess-Cloudflare-94.130.107.116",
+  "add": "94.130.107.116",
+  "port": "80",
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "aid": "0",
+  "scy": "auto",
+  "net": "ws",
+  "type": "none",
+  "host": "www.cloudflare.com",
+  "path": "/vmess-cf",
+  "tls": "",
+  "sni": "",
+  "alpn": "",
+  "fp": ""
+}

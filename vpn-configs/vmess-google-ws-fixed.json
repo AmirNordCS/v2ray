@@ -1,0 +1,18 @@
+{
+  "v": "2",
+  "ps": "VMess-Google-HTTP-94.130.107.116",
+  "add": "94.130.107.116",
+  "port": "80",
+  "id": "d0306468-e500-4193-95ef-a514b3396c90",
+  "aid": "0",
+  "scy": "auto",
+  "net": "ws",
+  "type": "none",
+  "host": "www.google.com",
+  "path": "/vmess-google",
+  "tls": "none",
+  "sni": "",
+  "alpn": "",
+  "fp": "",
+  "allowInsecure": 1
+}

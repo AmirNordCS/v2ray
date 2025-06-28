@@ -1,0 +1,17 @@
+{
+  "v": "2",
+  "ps": "VLESS-gRPC-94.130.107.116",
+  "add": "94.130.107.116",
+  "port": "80",
+  "id": "12345678-abcd-ef12-3456-789abcdef012",
+  "aid": "",
+  "scy": "",
+  "net": "grpc",
+  "type": "none",
+  "host": "",
+  "path": "vless-grpc",
+  "tls": "",
+  "sni": "",
+  "alpn": "",
+  "fp": ""
+}

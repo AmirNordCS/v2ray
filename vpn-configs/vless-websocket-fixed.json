@@ -1,0 +1,18 @@
+{
+  "v": "2",
+  "ps": "VLESS-WebSocket-HTTP-94.130.107.116",
+  "add": "94.130.107.116",
+  "port": "80",
+  "id": "f1e2d3c4-b5a6-9780-cdef-123456789abc",
+  "aid": "",
+  "scy": "none",
+  "net": "ws",
+  "type": "none",
+  "host": "www.microsoft.com",
+  "path": "/vless-ws",
+  "tls": "none",
+  "sni": "",
+  "alpn": "",
+  "fp": "",
+  "allowInsecure": 1
+}

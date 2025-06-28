@@ -1,0 +1,18 @@
+{
+  "v": "2",
+  "ps": "Trojan-WebSocket-94.130.107.116",
+  "add": "94.130.107.116",
+  "port": "80",
+  "id": "",
+  "aid": "",
+  "scy": "",
+  "net": "ws",
+  "type": "none",
+  "host": "www.github.com",
+  "path": "/trojan-ws",
+  "tls": "",
+  "sni": "",
+  "alpn": "",
+  "fp": "",
+  "password": "your-strong-trojan-password-123"
+}
