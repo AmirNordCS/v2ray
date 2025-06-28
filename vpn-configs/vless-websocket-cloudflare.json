@@ -1,0 +1,14 @@
+{
+  "v": "2",
+  "ps": "VLESS-WS-Cloudflare-94.130.107.116",
+  "add": "94.130.107.116",
+  "port": "8006",
+  "id": "87654321-dcba-21fe-6543-210987654321",
+  "net": "ws",
+  "type": "none",
+  "host": "www.cloudflare.com",
+  "path": "/",
+  "tls": "none",
+  "sni": "",
+  "alpn": ""
+}

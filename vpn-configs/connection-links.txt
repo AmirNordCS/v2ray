@@ -1,7 +1,7 @@
-# VPN Connection Links for 94.130.107.116 (Direct Ports - No Nginx)
+# VPN Connection Links for 94.130.107.116 (VLESS-Optimized Setup)
 # Copy these links and import them into your V2Ray client
 
-## VMess Connections
+## VMess Connections (WebSocket Only)
 
 # VMess Google WebSocket (Direct Port 8001)
 vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtR29vZ2xlLVdTLTk0LjEzMC4xMDcuMTE2IiwiYWRkIjoiOTQuMTMwLjEwNy4xMTYiLCJwb3J0IjoiODAwMSIsImlkIjoiZDAzMDY0NjgtZTUwMC00MTkzLTk1ZWYtYTUxNGIzMzk2YzkwIiwiYWlkIjoiMCIsInNjeSI6ImF1dG8iLCJuZXQiOiJ3cyIsInR5cGUiOiJub25lIiwiaG9zdCI6Ind3dy5nb29nbGUuY29tIiwicGF0aCI6Ii8iLCJ0bHMiOiJub25lIiwic25pIjoiIiwiYWxwbiI6IiJ9
@@ -9,15 +9,24 @@ vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtR29vZ2xlLVdTLTk0LjEzMC4xMDcuMTE2IiwiYWRkIjoi
 # VMess Cloudflare WebSocket (Direct Port 8002)
 vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtQ0YtV1MtOTQuMTMwLjEwNy4xMTYiLCJhZGQiOiI5NC4xMzAuMTA3LjExNiIsInBvcnQiOiI4MDAyIiwiaWQiOiJhMWIyYzNkNC1lNWY2LTc4OTAtYWJjZC1lZjEyMzQ1Njc4OTAiLCJhaWQiOiIwIiwic2N5IjoiYXV0byIsIm5ldCI6IndzIiwidHlwZSI6Im5vbmUiLCJob3N0Ijoid3d3LmNsb3VkZmxhcmUuY29tIiwicGF0aCI6Ii8iLCJ0bHMiOiJub25lIiwic25pIjoiIiwiYWxwbiI6IiJ9
 
-# VMess Direct TCP (Direct Port 8080) - PROVEN WORKING ✅
-vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtRGlyZWN0LVRDUC05NC4xMzAuMTA3LjExNiIsImFkZCI6Ijk0LjEzMC4xMDcuMTE2IiwicG9ydCI6IjgwODAiLCJpZCI6Ijk5ODg3NzY2LTU1NDQtMzMyMi0xMTAwLWFhYmJjY2RkZWVmZiIsImFpZCI6IjAiLCJzY3kiOiJhdXRvIiwibmV0IjoidGNwIiwidHlwZSI6Imh0dHAiLCJob3N0Ijoid3d3Lm5ldGZsaXguY29tIiwicGF0aCI6IiIsInRscyI6Im5vbmUiLCJzbmkiOiIiLCJhbHBuIjoiIn0=
+## VLESS Connections (RECOMMENDED) ✅
 
-## VLESS Connections
+# VLESS Direct TCP (Direct Port 8080) - FASTEST ⚡
+vless://99887766-5544-3322-1100-aabbccddeeff@94.130.107.116:8080?type=tcp&headerType=http&host=www.netflix.com&security=none#VLESS-Direct-TCP-94.130.107.116
 
-# VLESS WebSocket (Direct Port 8003)
-vless://f1e2d3c4-b5a6-9780-cdef-123456789abc@94.130.107.116:8003?type=ws&host=www.microsoft.com&path=/&security=none#VLESS-WS-94.130.107.116
+# VLESS WebSocket Microsoft (Direct Port 8003)
+vless://f1e2d3c4-b5a6-9780-cdef-123456789abc@94.130.107.116:8003?type=ws&host=www.microsoft.com&path=/&security=none#VLESS-WS-Microsoft-94.130.107.116
+
+# VLESS WebSocket Google (Direct Port 8004)
+vless://12345678-abcd-ef12-3456-789abcdef012@94.130.107.116:8004?type=ws&host=www.google.com&path=/&security=none#VLESS-WS-Google-94.130.107.116
+
+# VLESS WebSocket Cloudflare (Direct Port 8006)
+vless://87654321-dcba-21fe-6543-210987654321@94.130.107.116:8006?type=ws&host=www.cloudflare.com&path=/&security=none#VLESS-WS-Cloudflare-94.130.107.116
+
+# VLESS WebSocket GitHub (Direct Port 8007)
+vless://abcdefgh-1234-5678-9abc-def123456789@94.130.107.116:8007?type=ws&host=www.github.com&path=/&security=none#VLESS-WS-GitHub-94.130.107.116
 
 ## Trojan Connection
 
-# Trojan WebSocket (Direct Port 8005)
-trojan://your-strong-trojan-password-123@94.130.107.116:8005?type=ws&host=www.github.com&path=/&security=none#Trojan-WS-94.130.107.116 
+# Trojan WebSocket (Direct Port 8005) - FIXED for HTTP-only
+trojan://your-strong-trojan-password-123@94.130.107.116:8005?type=ws&host=www.github.com&path=/&security=none&allowInsecure=1#Trojan-WS-HTTP-94.130.107.116 

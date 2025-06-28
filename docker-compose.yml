@@ -6,11 +6,14 @@ services:
     container_name: xray-proxy
     restart: unless-stopped
     ports:
-      - "8080:8080" # VMess Direct TCP
       - "8001:8001" # VMess WebSocket Google
       - "8002:8002" # VMess WebSocket Cloudflare
-      - "8003:8003" # VLESS WebSocket
+      - "8003:8003" # VLESS WebSocket Microsoft
+      - "8004:8004" # VLESS WebSocket Google
       - "8005:8005" # Trojan WebSocket
+      - "8006:8006" # VLESS WebSocket Cloudflare
+      - "8007:8007" # VLESS WebSocket GitHub
+      - "8080:8080" # VLESS Direct TCP (replaced VMess)
     volumes:
       - ./xray-config.json:/etc/xray/config.json:ro
       - ./logs:/var/log/xray

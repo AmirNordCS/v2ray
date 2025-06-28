@@ -1,0 +1,14 @@
+{
+  "v": "2",
+  "ps": "VLESS-WS-GitHub-94.130.107.116",
+  "add": "94.130.107.116",
+  "port": "8007",
+  "id": "abcdefgh-1234-5678-9abc-def123456789",
+  "net": "ws",
+  "type": "none",
+  "host": "www.github.com",
+  "path": "/",
+  "tls": "none",
+  "sni": "",
+  "alpn": ""
+}

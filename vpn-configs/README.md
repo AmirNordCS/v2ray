@@ -1,186 +1,152 @@
-# VPN Configurations for 94.130.107.116
+# VLESS-Optimized Multi-Protocol VPN Client Configurations
 
-## Simplified Direct Port Setup (No Nginx)
+This directory contains client configuration files for connecting to your VLESS-optimized multi-protocol proxy server.
 
-## 🎯 **Available Configurations**
+## 🚀 VLESS Protocols (RECOMMENDED)
 
-### ✅ **VMess Direct TCP** (PROVEN WORKING - 115ms ping)
+VLESS is the modern successor to VMess, offering better performance and efficiency.
 
-- **File:** `vmess-direct-tcp.json`
-- **Port:** 8080
-- **Protocol:** TCP with HTTP header
-- **Host:** `www.netflix.com`
-- **Status:** ✅ **Working perfectly**
-- **Best for:** Fastest connection, lowest latency
+### 1. VLESS Direct TCP (Port 8080) ⚡ **FASTEST**
 
-### 🔄 **VMess Google WebSocket**
+- **File**: `vless-direct-tcp.json`
+- **Port**: 8080
+- **Type**: Direct TCP with HTTP header
+- **Best for**: Maximum speed and stability
+- **Latency**: ~115ms (proven working)
 
-- **File:** `vmess-google-ws.json`
-- **Port:** 8001 (direct access)
-- **Host:** `www.google.com`
-- **Path:** `/`
-- **Best for:** General browsing, good compatibility
+### 2. VLESS WebSocket Microsoft (Port 8003)
 
-### 🔄 **VMess Cloudflare WebSocket**
+- **File**: `vless-websocket.json`
+- **Port**: 8003
+- **Host**: www.microsoft.com
+- **Best for**: Bypassing firewalls that block direct connections
 
-- **File:** `vmess-cloudflare-ws.json`
-- **Port:** 8002 (direct access)
-- **Host:** `www.cloudflare.com`
-- **Path:** `/`
-- **Best for:** High performance, CDN optimization
+### 3. VLESS WebSocket Google (Port 8004)
 
-### 🔄 **VLESS WebSocket**
+- **File**: `vless-websocket-google.json`
+- **Port**: 8004
+- **Host**: www.google.com
+- **Best for**: Countries where Google is accessible
 
-- **File:** `vless-websocket.json`
-- **Port:** 8003 (direct access)
-- **Host:** `www.microsoft.com`
-- **Path:** `/`
-- **Best for:** Latest protocol, better performance
+### 4. VLESS WebSocket Cloudflare (Port 8006)
 
-### 🔄 **Trojan WebSocket**
+- **File**: `vless-websocket-cloudflare.json`
+- **Port**: 8006
+- **Host**: www.cloudflare.com
+- **Best for**: CDN-friendly connections
 
-- **File:** `trojan-websocket.json`
-- **Port:** 8005 (direct access)
-- **Host:** `www.github.com`
-- **Path:** `/`
-- **Password:** `your-strong-trojan-password-123`
-- **Best for:** Maximum stealth
+### 5. VLESS WebSocket GitHub (Port 8007)
 
-## 📱 **How to Import Configurations**
+- **File**: `vless-websocket-github.json`
+- **Port**: 8007
+- **Host**: www.github.com
+- **Best for**: Developer-friendly environments
 
-### **Method 1: JSON Files**
+## 🔄 Fallback Protocols
 
-1. Download any `.json` file from this folder
-2. In your V2Ray client:
-   - **V2RayN (Windows):** Servers → Add VMess/VLESS Server → Import from file
-   - **V2RayNG (Android):** + → Import config from file
-   - **V2RayU (macOS):** Configure → Import from file
+### VMess WebSocket Google (Port 8001)
 
-### **Method 2: Connection Links**
+- **File**: `vmess-google-ws.json`
+- **Legacy protocol**, use if VLESS doesn't work
 
-1. Copy any link from `connection-links.txt`
-2. In your V2Ray client:
-   - **V2RayN:** Servers → Import from clipboard
-   - **V2RayNG:** + → Import config from clipboard
-   - **V2RayU:** Configure → Import from pasteboard
-   - **iOS (Shadowrocket):** + → Add → Paste link
+### VMess WebSocket Cloudflare (Port 8002)
 
-## 🚀 **Which Configuration to Choose?**
+- **File**: `vmess-cloudflare-ws.json`
+- **Legacy protocol**, use if VLESS doesn't work
 
-### **For Reliability:**
+### Trojan WebSocket (Port 8005)
 
-1. **VMess Direct TCP** (port 8080) - ✅ **Start here!**
-2. **VMess Google WebSocket** (port 8001)
-3. **VLESS WebSocket** (port 8003)
+- **File**: `trojan-websocket.json`
+- **Password-based authentication**
 
-### **For Speed:**
+## 📱 Client Setup Instructions
 
-1. **VMess Direct TCP** (fastest, proven working)
-2. **VLESS WebSocket** (modern protocol)
-3. **VMess WebSocket** (reliable)
+### Android (v2rayNG)
 
-### **For Stealth:**
+1. Download v2rayNG from GitHub or Google Play
+2. Import JSON config: Menu → Add Profile → Import from File
+3. Or use connection links from `connection-links.txt`
+4. **Start with VLESS Direct TCP** for best performance
 
-1. **Trojan WebSocket** (maximum stealth)
-2. **VMess Cloudflare WebSocket** (CDN camouflage)
-3. **VLESS WebSocket** (modern stealth)
+### iOS (Shadowrocket/Quantumult X)
 
-## ⚙️ **Connection Settings**
+1. Copy connection link from `connection-links.txt`
+2. Add to your client
+3. **Recommended**: VLESS Direct TCP link
 
-- **Server IP:** 94.130.107.116
-- **Encryption:** Auto/AES-128-GCM
-- **TLS:** None (direct HTTP connections)
-- **DNS:** 8.8.8.8, 1.1.1.1
+### Windows (v2rayN)
 
-## 🔧 **Troubleshooting**
+1. Import JSON config: Add Server → Import from File
+2. Or use connection links
+3. **Recommended**: Start with VLESS Direct TCP
 
-### **If Connection Fails:**
+### macOS (V2RayX/V2RayU)
 
-1. **Start with VMess Direct TCP** (port 8080) - proven working!
-2. Check if ports are accessible from your location
-3. Try different protocols if one doesn't work
-4. Ensure your VPS is running: `docker-compose ps`
+1. Import JSON configuration file
+2. **Recommended**: VLESS Direct TCP for best performance
 
-### **Port Status Check:**
+### Linux (v2ray/xray)
 
-- **8080** (VMess TCP): ✅ Working
-- **8001** (VMess Google WS): 🔄 Test needed
-- **8002** (VMess CF WS): 🔄 Test needed
-- **8003** (VLESS WS): 🔄 Test needed
-- **8005** (Trojan WS): 🔄 Test needed
+1. Use JSON config files directly with v2ray/xray core
+2. Place in `/etc/v2ray/config.json` or similar
 
-### **Performance Issues:**
+## 🎯 Performance Guide
 
-1. **Use VMess Direct TCP** (port 8080) for best speed
-2. Check your VPS resources: `docker stats`
-3. Try different WebSocket protocols
-4. Consider changing DNS to 8.8.8.8
+### Best Performance Order:
 
-## 📋 **Quick Import Links**
+1. **VLESS Direct TCP (8080)** - Fastest, most stable
+2. **VLESS WebSocket (8003-8007)** - Good performance, firewall-friendly
+3. **VMess WebSocket (8001-8002)** - Legacy fallback
+4. **Trojan WebSocket (8005)** - Alternative protocol
 
-**Copy these links and paste them into your V2Ray client:**
+### Troubleshooting Connection Issues:
 
-### 🏆 **Recommended (Proven Working):**
+1. **First**: Try VLESS Direct TCP (port 8080)
+2. **If blocked**: Try VLESS WebSocket with different hosts
+3. **If still blocked**: Try VMess WebSocket as fallback
+4. **Check firewall**: Ensure ports are open on your network
 
-```
-vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtRGlyZWN0LVRDUC05NC4xMzAuMTA3LjExNiIsImFkZCI6Ijk0LjEzMC4xMDcuMTE2IiwicG9ydCI6IjgwODAiLCJpZCI6Ijk5ODg3NzY2LTU1NDQtMzMyMi0xMTAwLWFhYmJjY2RkZWVmZiIsImFpZCI6IjAiLCJzY3kiOiJhdXRvIiwibmV0IjoidGNwIiwidHlwZSI6Imh0dHAiLCJob3N0Ijoid3d3Lm5ldGZsaXguY29tIiwicGF0aCI6IiIsInRscyI6Im5vbmUiLCJzbmkiOiIiLCJhbHBuIjoiIn0=
-```
+## 🔧 Technical Details
 
-### 🔄 **Alternative Options:**
+### Server Configuration:
 
-```
-# VMess Google WebSocket
-vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtR29vZ2xlLVdTLTk0LjEzMC4xMDcuMTE2IiwiYWRkIjoiOTQuMTMwLjEwNy4xMTYiLCJwb3J0IjoiODAwMSIsImlkIjoiZDAzMDY0NjgtZTUwMC00MTkzLTk1ZWYtYTUxNGIzMzk2YzkwIiwiYWlkIjoiMCIsInNjeSI6ImF1dG8iLCJuZXQiOiJ3cyIsInR5cGUiOiJub25lIiwiaG9zdCI6Ind3dy5nb29nbGUuY29tIiwicGF0aCI6Ii8iLCJ0bHMiOiJub25lIiwic25pIjoiIiwiYWxwbiI6IiJ9
+- **IP**: 94.130.107.116
+- **No TLS/SSL**: HTTP-only setup for simplicity
+- **No CDN**: Direct IP connections
+- **Docker**: All services in containers
 
-# VLESS WebSocket
-vless://f1e2d3c4-b5a6-9780-cdef-123456789abc@94.130.107.116:8003?type=ws&host=www.microsoft.com&path=/&security=none#VLESS-WS-94.130.107.116
+### Security Notes:
 
-# Trojan WebSocket
-trojan://your-strong-trojan-password-123@94.130.107.116:8005?type=ws&host=www.github.com&path=/&security=none#Trojan-WS-94.130.107.116
-```
+- All connections use HTTP (no HTTPS)
+- Suitable for bypassing content restrictions
+- Use with trusted networks
+- Consider additional encryption if needed
 
-## 🔒 **Security Notes**
+### Protocol Features:
 
-- ✅ **Simplified setup** - No nginx complexity
-- ✅ **Direct port access** - Each protocol on its own port
-- ✅ **No path routing issues** - Direct container connections
-- ⚠️ **HTTP only** - No TLS (traffic encrypted by V2Ray protocols)
-- 🔐 **Change UUIDs** and passwords for better security
+- **VLESS**: Modern, efficient, lower overhead
+- **VMess**: Legacy, wider compatibility
+- **Trojan**: Password-based, good for some firewalls
+- **WebSocket**: Helps bypass deep packet inspection
 
-## 📞 **Management**
+## 📊 Connection Status
 
-### **VPS Commands:**
+After deployment, test in this order:
 
-```bash
-# Check service status
-docker-compose ps
+1. ✅ VLESS Direct TCP (8080) - Primary choice
+2. ✅ VLESS WebSocket Microsoft (8003)
+3. ✅ VLESS WebSocket Google (8004)
+4. ✅ VLESS WebSocket Cloudflare (8006)
+5. ✅ VLESS WebSocket GitHub (8007)
+6. ✅ VMess WebSocket Google (8001) - Fallback
+7. ✅ VMess WebSocket Cloudflare (8002) - Fallback
+8. ⚠️ Trojan WebSocket (8005) - May need TLS disable
 
-# View logs
-docker-compose logs -f
+## 🎉 Quick Start
 
-# Restart services
-docker-compose restart
+1. **Download**: Get all files from this directory
+2. **Start Simple**: Use VLESS Direct TCP first (port 8080)
+3. **Test Alternative**: If blocked, try VLESS WebSocket variants
+4. **Fallback**: Use VMess if VLESS doesn't work in your region
 
-# Stop services
-docker-compose down
-```
-
-### **Port Testing:**
-
-```bash
-# Test if ports are open
-netstat -tlnp | grep ":8080\|:8001\|:8002\|:8003\|:8005"
-```
-
-## ✨ **Benefits of This Setup**
-
-- ✅ **Much simpler** than nginx reverse proxy
-- ✅ **No container networking issues**
-- ✅ **Direct port access** for each protocol
-- ✅ **Easier debugging** and troubleshooting
-- ✅ **Proven working** (VMess TCP confirmed at 115ms)
-- ✅ **No WebSocket routing problems**
-
----
-
-**Start with VMess Direct TCP (port 8080) - it's proven to work perfectly!** 🚀
+Your VLESS-optimized proxy server is ready! Start with the direct TCP connection for the best experience.

@@ -1,0 +1,14 @@
+{
+  "v": "2",
+  "ps": "VLESS-WS-Google-94.130.107.116",
+  "add": "94.130.107.116",
+  "port": "8004",
+  "id": "12345678-abcd-ef12-3456-789abcdef012",
+  "net": "ws",
+  "type": "none",
+  "host": "www.google.com",
+  "path": "/",
+  "tls": "none",
+  "sni": "",
+  "alpn": ""
+}

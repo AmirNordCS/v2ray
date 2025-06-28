@@ -52,7 +52,7 @@
       }
     },
     {
-      "tag": "vless-ws",
+      "tag": "vless-ws-microsoft",
       "port": 8003,
       "listen": "0.0.0.0",
       "protocol": "vless",
@@ -70,6 +70,29 @@
           "path": "/",
           "headers": {
             "Host": "www.microsoft.com"
+          }
+        }
+      }
+    },
+    {
+      "tag": "vless-ws-google",
+      "port": 8004,
+      "listen": "0.0.0.0",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "12345678-abcd-ef12-3456-789abcdef012"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/",
+          "headers": {
+            "Host": "www.google.com"
           }
         }
       }
@@ -97,17 +120,63 @@
       }
     },
     {
-      "tag": "vmess-direct",
-      "port": 8080,
+      "tag": "vless-ws-cloudflare",
+      "port": 8006,
       "listen": "0.0.0.0",
-      "protocol": "vmess",
+      "protocol": "vless",
       "settings": {
         "clients": [
           {
-            "id": "99887766-5544-3322-1100-aabbccddeeff",
-            "alterId": 0
+            "id": "87654321-dcba-21fe-6543-210987654321"
           }
-        ]
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/",
+          "headers": {
+            "Host": "www.cloudflare.com"
+          }
+        }
+      }
+    },
+    {
+      "tag": "vless-ws-github",
+      "port": 8007,
+      "listen": "0.0.0.0",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "abcdefgh-1234-5678-9abc-def123456789"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/",
+          "headers": {
+            "Host": "www.github.com"
+          }
+        }
+      }
+    },
+    {
+      "tag": "vless-direct-tcp",
+      "port": 8080,
+      "listen": "0.0.0.0",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "99887766-5544-3322-1100-aabbccddeeff"
+          }
+        ],
+        "decryption": "none"
       },
       "streamSettings": {
         "network": "tcp",
