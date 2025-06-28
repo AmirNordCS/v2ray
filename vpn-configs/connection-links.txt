@@ -23,8 +23,8 @@ vless://12345678-abcd-ef12-3456-789abcdef012@94.130.107.116:8004?type=ws&host=ww
 # VLESS WebSocket Cloudflare (Direct Port 8006)
 vless://87654321-dcba-21fe-6543-210987654321@94.130.107.116:8006?type=ws&host=www.cloudflare.com&path=/&security=none#VLESS-WS-Cloudflare-94.130.107.116
 
-# VLESS WebSocket GitHub (Direct Port 8007)
-vless://abcdefgh-1234-5678-9abc-def123456789@94.130.107.116:8007?type=ws&host=www.github.com&path=/&security=none#VLESS-WS-GitHub-94.130.107.116
+# VLESS WebSocket GitHub (Direct Port 8007) - FIXED UUID
+vless://abcdef01-1234-5678-9abc-def123456789@94.130.107.116:8007?type=ws&host=www.github.com&path=/&security=none#VLESS-WS-GitHub-94.130.107.116
 
 ## Trojan Connection
 
