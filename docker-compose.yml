@@ -22,6 +22,34 @@ services:
       - proxy-network
     command: ["xray", "run", "-config", "/etc/xray/config.json"]
 
+  wireguard:
+    image: lscr.io/linuxserver/wireguard:latest
+    container_name: wireguard-server
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      - SERVERURL=94.130.107.116
+      - SERVERPORT=51820
+      - PEERS=client1,client2,client3,client4,client5
+      - PEERDNS=8.8.8.8,1.1.1.1
+      - INTERNAL_SUBNET=10.13.13.0
+      - ALLOWEDIPS=0.0.0.0/0
+      - LOG_CONFS=true
+    volumes:
+      - ./wireguard-config:/config
+      - /lib/modules:/lib/modules:ro
+    ports:
+      - "51820:51820/udp" # WireGuard UDP port
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    networks:
+      - proxy-network
+
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower-updater

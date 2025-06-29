@@ -1,17 +1,37 @@
-# VLESS-Optimized Multi-Protocol VPN Client Configurations
+# Multi-Protocol VPN Client Configurations (VLESS + WireGuard Optimized)
 
-This directory contains client configuration files for connecting to your VLESS-optimized multi-protocol proxy server.
+This directory contains client configuration files for connecting to your ultimate multi-protocol VPN server with WireGuard and VLESS protocols.
 
-## 🚀 VLESS Protocols (RECOMMENDED)
+## 🔥 WireGuard VPN (TOP RECOMMENDED)
 
-VLESS is the modern successor to VMess, offering better performance and efficiency.
+**WireGuard is the fastest and most efficient VPN protocol available!**
 
-### 1. VLESS Direct TCP (Port 8080) ⚡ **FASTEST**
+### Why Choose WireGuard First?
+
+- **🚀 Fastest speeds** - kernel-level performance
+- **🔋 Better battery life** on mobile devices
+- **⚡ Lower latency** than HTTP-based protocols
+- **🛡️ Works when HTTP protocols are blocked**
+- **📱 Native support** in all modern devices
+
+### WireGuard Setup:
+
+- **Port**: 51820/udp
+- **Config files**: `../wireguard-config/peer_client*/peer_client*.conf`
+- **QR codes**: `../wireguard-config/peer_client*/peer_client*.png`
+- **Clients available**: 5 (client1-client5)
+- **Guide**: See `wireguard-client-guide.md`
+
+## 🚀 VLESS Protocols (HTTP Proxy)
+
+VLESS is the modern successor to VMess, offering better performance and efficiency for HTTP-based proxy connections.
+
+### 1. VLESS Direct TCP (Port 8080) ⚡ **FASTEST HTTP PROXY**
 
 - **File**: `vless-direct-tcp.json`
 - **Port**: 8080
 - **Type**: Direct TCP with HTTP header
-- **Best for**: Maximum speed and stability
+- **Best for**: Maximum speed when WireGuard is blocked
 - **Latency**: ~115ms (proven working)
 
 ### 2. VLESS WebSocket Microsoft (Port 8003)
@@ -61,31 +81,78 @@ VLESS is the modern successor to VMess, offering better performance and efficien
 
 ## 📱 Client Setup Instructions
 
-### Android (v2rayNG)
+### Priority Order (Start Here!):
+
+1. **🥇 WireGuard** (fastest, best battery life)
+2. **🥈 VLESS Direct TCP** (fast HTTP proxy)
+3. **🥉 VLESS WebSocket** (firewall bypass)
+4. **🏃 VMess/Trojan** (compatibility fallback)
+
+### Android Setup
+
+**Option 1: WireGuard (Recommended)**
+
+1. Install WireGuard app from Google Play
+2. Scan QR code from `../wireguard-config/peer_client1/peer_client1.png`
+3. Connect!
+
+**Option 2: v2rayNG (HTTP Proxy)**
 
 1. Download v2rayNG from GitHub or Google Play
 2. Import JSON config: Menu → Add Profile → Import from File
-3. Or use connection links from `connection-links.txt`
-4. **Start with VLESS Direct TCP** for best performance
+3. **Start with VLESS Direct TCP** for best HTTP performance
 
-### iOS (Shadowrocket/Quantumult X)
+### iOS Setup
+
+**Option 1: WireGuard (Recommended)**
+
+1. Install WireGuard app from App Store
+2. Import config from `../wireguard-config/peer_client1/peer_client1.conf`
+3. Connect!
+
+**Option 2: Shadowrocket/Quantumult X**
 
 1. Copy connection link from `connection-links.txt`
 2. Add to your client
-3. **Recommended**: VLESS Direct TCP link
-
-### Windows (v2rayN)
-
-1. Import JSON config: Add Server → Import from File
-2. Or use connection links
 3. **Recommended**: Start with VLESS Direct TCP
 
-### macOS (V2RayX/V2RayU)
+### Windows Setup
+
+**Option 1: WireGuard (Recommended)**
+
+1. Download WireGuard from wireguard.com
+2. Import `../wireguard-config/peer_client1/peer_client1.conf`
+3. Activate connection
+
+**Option 2: v2rayN (HTTP Proxy)**
+
+1. Import JSON config: Add Server → Import from File
+2. **Recommended**: Start with VLESS Direct TCP
+
+### macOS Setup
+
+**Option 1: WireGuard (Recommended)**
+
+1. Install WireGuard from Mac App Store
+2. Import config file
+3. Connect
+
+**Option 2: V2RayX/V2RayU**
 
 1. Import JSON configuration file
 2. **Recommended**: VLESS Direct TCP for best performance
 
-### Linux (v2ray/xray)
+### Linux Setup
+
+**Option 1: WireGuard (Recommended)**
+
+```bash
+sudo apt install wireguard
+sudo cp peer_client1.conf /etc/wireguard/wg0.conf
+sudo wg-quick up wg0
+```
+
+**Option 2: v2ray/xray**
 
 1. Use JSON config files directly with v2ray/xray core
 2. Place in `/etc/v2ray/config.json` or similar
@@ -94,38 +161,48 @@ VLESS is the modern successor to VMess, offering better performance and efficien
 
 ### Best Performance Order:
 
-1. **VLESS Direct TCP (8080)** - Fastest, most stable
-2. **VLESS WebSocket (8003-8007)** - Good performance, firewall-friendly
-3. **VMess WebSocket (8001-8002)** - Legacy fallback
-4. **Trojan WebSocket (8005)** - Alternative protocol
+1. **🔥 WireGuard (51820/udp)** - Fastest overall, best battery
+2. **⚡ VLESS Direct TCP (8080)** - Fastest HTTP proxy
+3. **🌐 VLESS WebSocket (8003-8007)** - Good performance, firewall-friendly
+4. **🔄 VMess WebSocket (8001-8002)** - Legacy fallback
+5. **🔒 Trojan WebSocket (8005)** - Alternative protocol
+
+### When to Use Each:
+
+- **WireGuard**: Default choice for all use cases
+- **VLESS Direct TCP**: When WireGuard is blocked but need speed
+- **VLESS WebSocket**: When direct connections are filtered
+- **VMess/Trojan**: When VLESS is not supported by your client
 
 ### Troubleshooting Connection Issues:
 
-1. **First**: Try VLESS Direct TCP (port 8080)
-2. **If blocked**: Try VLESS WebSocket with different hosts
-3. **If still blocked**: Try VMess WebSocket as fallback
-4. **Check firewall**: Ensure ports are open on your network
+1. **First**: Try WireGuard (usually works everywhere)
+2. **If WireGuard blocked**: Try VLESS Direct TCP (port 8080)
+3. **If still blocked**: Try VLESS WebSocket with different hosts
+4. **Last resort**: Try VMess WebSocket as fallback
 
 ## 🔧 Technical Details
 
 ### Server Configuration:
 
 - **IP**: 94.130.107.116
-- **No TLS/SSL**: HTTP-only setup for simplicity
+- **WireGuard**: UDP port 51820, kernel-level performance
+- **HTTP Protocols**: No TLS/SSL, HTTP-only for simplicity
 - **No CDN**: Direct IP connections
 - **Docker**: All services in containers
 
 ### Security Notes:
 
-- All connections use HTTP (no HTTPS)
-- Suitable for bypassing content restrictions
+- **WireGuard**: ChaCha20 encryption, Curve25519 keys
+- **HTTP protocols**: Suitable for bypassing content restrictions
 - Use with trusted networks
-- Consider additional encryption if needed
+- Consider WireGuard for maximum security
 
 ### Protocol Features:
 
-- **VLESS**: Modern, efficient, lower overhead
-- **VMess**: Legacy, wider compatibility
+- **WireGuard**: Modern VPN, kernel implementation, fastest
+- **VLESS**: Modern HTTP proxy, efficient, lower overhead
+- **VMess**: Legacy HTTP proxy, wider compatibility
 - **Trojan**: Password-based, good for some firewalls
 - **WebSocket**: Helps bypass deep packet inspection
 
@@ -133,20 +210,21 @@ VLESS is the modern successor to VMess, offering better performance and efficien
 
 After deployment, test in this order:
 
-1. ✅ VLESS Direct TCP (8080) - Primary choice
-2. ✅ VLESS WebSocket Microsoft (8003)
-3. ✅ VLESS WebSocket Google (8004)
-4. ✅ VLESS WebSocket Cloudflare (8006)
-5. ✅ VLESS WebSocket GitHub (8007)
-6. ✅ VMess WebSocket Google (8001) - Fallback
-7. ✅ VMess WebSocket Cloudflare (8002) - Fallback
-8. ⚠️ Trojan WebSocket (8005) - May need TLS disable
+1. 🔥 **WireGuard (51820/udp)** - Primary choice
+2. ✅ **VLESS Direct TCP (8080)** - HTTP proxy fallback
+3. ✅ **VLESS WebSocket Microsoft (8003)**
+4. ✅ **VLESS WebSocket Google (8004)**
+5. ✅ **VLESS WebSocket Cloudflare (8006)**
+6. ✅ **VLESS WebSocket GitHub (8007)**
+7. ✅ **VMess WebSocket Google (8001)** - Legacy fallback
+8. ✅ **VMess WebSocket Cloudflare (8002)** - Legacy fallback
+9. ⚠️ **Trojan WebSocket (8005)** - May need TLS disable
 
 ## 🎉 Quick Start
 
 1. **Download**: Get all files from this directory
-2. **Start Simple**: Use VLESS Direct TCP first (port 8080)
-3. **Test Alternative**: If blocked, try VLESS WebSocket variants
-4. **Fallback**: Use VMess if VLESS doesn't work in your region
+2. **Start with WireGuard**: Use config from `../wireguard-config/peer_client1/`
+3. **HTTP Proxy Backup**: Use VLESS Direct TCP if WireGuard blocked
+4. **Test Alternatives**: Try different protocols if needed
 
-Your VLESS-optimized proxy server is ready! Start with the direct TCP connection for the best experience.
+**Your ultimate multi-protocol VPN server is ready! Start with WireGuard for the best experience! 🔥**

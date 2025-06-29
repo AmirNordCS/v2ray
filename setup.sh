@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Multi-Protocol Proxy Setup Script (VLESS-Optimized)
+# Multi-Protocol Proxy + WireGuard Setup Script (VLESS-Optimized)
 # Run with: bash setup.sh
 
 set -e
@@ -50,8 +50,8 @@ install_dependencies() {
     # Update system
     apt update && apt upgrade -y
     
-    # Install required packages
-    apt install -y curl wget git ufw htop nano
+    # Install required packages (including WireGuard tools)
+    apt install -y curl wget git ufw htop nano wireguard-tools
     
     # Install Docker if not present
     if ! command -v docker &> /dev/null; then
@@ -94,11 +94,12 @@ setup_firewall() {
     ufw allow 8006/tcp  # VLESS WebSocket Cloudflare
     ufw allow 8007/tcp  # VLESS WebSocket GitHub
     ufw allow 8080/tcp  # VLESS Direct TCP
+    ufw allow 51820/udp # WireGuard VPN
     
     # Enable firewall
     ufw --force enable
     
-    print_status "Firewall configured for VLESS-optimized setup"
+    print_status "Firewall configured for VLESS + WireGuard setup"
 }
 
 stop_existing_services() {
@@ -111,21 +112,23 @@ stop_existing_services() {
     pkill -f xray || true
     pkill -f v2ray || true
     pkill -f nginx || true
+    pkill -f wireguard || true
     
     print_status "Existing services stopped"
 }
 
 start_services() {
-    print_header "Starting VLESS-Optimized Proxy Services"
+    print_header "Starting VLESS + WireGuard Services"
     
-    # Create logs directory
+    # Create logs and config directories
     mkdir -p logs
+    mkdir -p wireguard-config
     
     # Start all services
     docker-compose up -d
     
     # Wait for services to start
-    sleep 10
+    sleep 15
     
     # Check service status
     docker-compose ps
@@ -186,10 +189,16 @@ test_connections() {
     else
         print_warning "❌ VLESS WebSocket GitHub (port 8007) - Not responding"
     fi
+    
+    if netstat -ulnp | grep -q ":51820 "; then
+        print_status "✅ WireGuard VPN (port 51820/udp) - OK"
+    else
+        print_warning "❌ WireGuard VPN (port 51820/udp) - Not responding"
+    fi
 }
 
 generate_client_configs() {
-    print_header "Generating VLESS-Optimized Client Configurations"
+    print_header "Generating VLESS + WireGuard Client Configurations"
     
     mkdir -p vpn-configs
     
@@ -199,19 +208,36 @@ generate_client_configs() {
     print_status "✅ Multiple VLESS WebSocket options (ports 8003-8007)"
     print_status "✅ VMess WebSocket fallbacks (ports 8001-8002)"
     print_status "✅ Trojan WebSocket (port 8005)"
+    print_status "🔥 WireGuard VPN (port 51820/udp) - NEW!"
+    
+    # Wait a bit for WireGuard to generate configs
+    sleep 10
+    
+    if [ -d "./wireguard-config" ]; then
+        print_status "🔑 WireGuard client configurations generated!"
+        print_status "📁 Check ./wireguard-config/peer_client*/peer_client*.conf"
+        print_status "📱 Or scan QR codes: ./wireguard-config/peer_client*/peer_client*.png"
+    fi
 }
 
 print_summary() {
-    print_header "🎉 VLESS-Optimized Setup Complete!"
+    print_header "🎉 VLESS + WireGuard Setup Complete!"
     
-    echo -e "${GREEN}✅ Your VLESS-optimized multi-protocol proxy server is now running!${NC}"
+    echo -e "${GREEN}✅ Your ultimate multi-protocol VPN server is now running!${NC}"
     echo ""
     echo -e "${BLUE}📊 Server Details:${NC}"
     echo "• Server IP: $SERVER_IP"
-    echo "• VLESS-focused setup (modern & efficient)"
+    echo "• VLESS-focused setup + WireGuard VPN"
     echo "• Direct connections (no reverse proxy)"
     echo ""
-    echo -e "${BLUE}🚀 VLESS Protocols (RECOMMENDED):${NC}"
+    echo -e "${BLUE}🔥 WireGuard VPN (RECOMMENDED FOR SPEED):${NC}"
+    echo "• Protocol: WireGuard"
+    echo "• Port: 51820/udp"
+    echo "• Config files: ./wireguard-config/peer_client*/peer_client*.conf"
+    echo "• QR codes: ./wireguard-config/peer_client*/peer_client*.png"
+    echo "• Clients supported: 5 (client1-client5)"
+    echo ""
+    echo -e "${BLUE}🚀 VLESS Protocols (HTTP Proxy):${NC}"
     echo "• VLESS + Direct TCP: Port 8080 ⚡ (FASTEST)"
     echo "• VLESS + WebSocket (Microsoft): Port 8003"
     echo "• VLESS + WebSocket (Google): Port 8004"
@@ -223,30 +249,38 @@ print_summary() {
     echo "• VMess + WebSocket (Cloudflare): Port 8002"
     echo "• Trojan + WebSocket (GitHub): Port 8005"
     echo ""
-    echo -e "${BLUE}📱 Client Setup:${NC}"
-    echo "• Updated configs in 'vpn-configs/' directory"
-    echo "• Start with VLESS Direct TCP for best performance"
-    echo "• Each protocol uses its own dedicated port"
+    echo -e "${BLUE}📱 Client Setup Priority:${NC}"
+    echo "1. 🥇 WireGuard (fastest, best battery life)"
+    echo "2. 🥈 VLESS Direct TCP (fast HTTP proxy)"
+    echo "3. 🥉 VLESS WebSocket (firewall bypass)"
+    echo "4. 🏃 VMess/Trojan (compatibility fallback)"
     echo ""
     echo -e "${BLUE}🛠️ Management Commands:${NC}"
-    echo "• View logs: docker-compose logs -f"
-    echo "• Restart: docker-compose restart"
-    echo "• Stop: docker-compose down"
+    echo "• View all logs: docker-compose logs -f"
+    echo "• View WireGuard logs: docker-compose logs wireguard"
+    echo "• Restart all: docker-compose restart"
+    echo "• Stop all: docker-compose down"
     echo "• Status: docker-compose ps"
     echo ""
-    echo -e "${GREEN}✨ Benefits of VLESS-Optimized Setup:${NC}"
-    echo "• VLESS is more efficient than VMess"
-    echo "• Multiple host options for better compatibility"
-    echo "• Direct port access for each protocol"
-    echo "• No nginx complexity"
-    echo "• Better performance and reliability"
+    echo -e "${BLUE}🔑 WireGuard Setup:${NC}"
+    echo "• Config files: ls ./wireguard-config/peer_client*/"
+    echo "• Show QR code: docker exec wireguard-server /app/show-peer client1"
+    echo "• Add more clients: Edit PEERS in docker-compose.yml"
     echo ""
-    echo -e "${GREEN}🚀 Your VLESS-optimized proxy server is ready!${NC}"
+    echo -e "${GREEN}✨ Benefits of WireGuard + VLESS Setup:${NC}"
+    echo "• WireGuard: Fastest VPN protocol, kernel-level performance"
+    echo "• VLESS: Efficient HTTP proxy for web browsing"
+    echo "• Multiple protocols for maximum compatibility"
+    echo "• Works in restrictive networks"
+    echo "• Better battery life on mobile devices"
+    echo ""
+    echo -e "${GREEN}🚀 Your ultimate VPN server is ready!${NC}"
+    echo -e "${YELLOW}Start with WireGuard for best performance! 🔥${NC}"
 }
 
 # Main execution
 main() {
-    print_header "🔧 VLESS-Optimized Multi-Protocol Proxy Setup"
+    print_header "🔧 VLESS + WireGuard Multi-Protocol VPN Setup"
     
     get_server_ip
     install_dependencies

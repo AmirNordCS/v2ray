@@ -1,15 +1,22 @@
-# VPN Connection Links for 94.130.107.116 (VLESS-Optimized Setup)
-# Copy these links and import them into your V2Ray client
+# VPN Connection Links for 94.130.107.116 (WireGuard + VLESS Optimized)
+# Copy these links and import them into your VPN client
 
-## VMess Connections (WebSocket Only)
+## 🔥 WireGuard VPN (TOP RECOMMENDED - FASTEST!)
 
-# VMess Google WebSocket (Direct Port 8001)
-vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtR29vZ2xlLVdTLTk0LjEzMC4xMDcuMTE2IiwiYWRkIjoiOTQuMTMwLjEwNy4xMTYiLCJwb3J0IjoiODAwMSIsImlkIjoiZDAzMDY0NjgtZTUwMC00MTkzLTk1ZWYtYTUxNGIzMzk2YzkwIiwiYWlkIjoiMCIsInNjeSI6ImF1dG8iLCJuZXQiOiJ3cyIsInR5cGUiOiJub25lIiwiaG9zdCI6Ind3dy5nb29nbGUuY29tIiwicGF0aCI6Ii8iLCJ0bHMiOiJub25lIiwic25pIjoiIiwiYWxwbiI6IiJ9
+# WireGuard is the fastest and most efficient VPN protocol
+# Config files: ../wireguard-config/peer_client*/peer_client*.conf
+# QR codes: ../wireguard-config/peer_client*/peer_client*.png
+# Port: 51820/udp
+# Clients available: client1, client2, client3, client4, client5
 
-# VMess Cloudflare WebSocket (Direct Port 8002)
-vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtQ0YtV1MtOTQuMTMwLjEwNy4xMTYiLCJhZGQiOiI5NC4xMzAuMTA3LjExNiIsInBvcnQiOiI4MDAyIiwiaWQiOiJhMWIyYzNkNC1lNWY2LTc4OTAtYWJjZC1lZjEyMzQ1Njc4OTAiLCJhaWQiOiIwIiwic2N5IjoiYXV0byIsIm5ldCI6IndzIiwidHlwZSI6Im5vbmUiLCJob3N0Ijoid3d3LmNsb3VkZmxhcmUuY29tIiwicGF0aCI6Ii8iLCJ0bHMiOiJub25lIiwic25pIjoiIiwiYWxwbiI6IiJ9
+# To connect with WireGuard:
+# 1. Install WireGuard app on your device
+# 2. Import config file or scan QR code
+# 3. Enable connection
+# 
+# Benefits: Fastest speeds, best battery life, works when HTTP blocked
 
-## VLESS Connections (RECOMMENDED) ✅
+## ⚡ VLESS Connections (HTTP PROXY - RECOMMENDED)
 
 # VLESS Direct TCP (Direct Port 8080) - FASTEST ⚡
 vless://99887766-5544-3322-1100-aabbccddeeff@94.130.107.116:8080?type=tcp&headerType=http&host=www.netflix.com&security=none#VLESS-Direct-TCP-94.130.107.116
@@ -26,7 +33,44 @@ vless://87654321-dcba-21fe-6543-210987654321@94.130.107.116:8006?type=ws&host=ww
 # VLESS WebSocket GitHub (Direct Port 8007) - FIXED UUID
 vless://abcdef01-1234-5678-9abc-def123456789@94.130.107.116:8007?type=ws&host=www.github.com&path=/&security=none#VLESS-WS-GitHub-94.130.107.116
 
-## Trojan Connection
+## 🔄 VMess Connections (WebSocket Only - LEGACY FALLBACK)
+
+# VMess Google WebSocket (Direct Port 8001)
+vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtR29vZ2xlLVdTLTk0LjEzMC4xMDcuMTE2IiwiYWRkIjoiOTQuMTMwLjEwNy4xMTYiLCJwb3J0IjoiODAwMSIsImlkIjoiZDAzMDY0NjgtZTUwMC00MTkzLTk1ZWYtYTUxNGIzMzk2YzkwIiwiYWlkIjoiMCIsInNjeSI6ImF1dG8iLCJuZXQiOiJ3cyIsInR5cGUiOiJub25lIiwiaG9zdCI6Ind3dy5nb29nbGUuY29tIiwicGF0aCI6Ii8iLCJ0bHMiOiJub25lIiwic25pIjoiIiwiYWxwbiI6IiJ9
+
+# VMess Cloudflare WebSocket (Direct Port 8002)
+vmess://eyJ2IjoiMiIsInBzIjoiVk1lc3MtQ0YtV1MtOTQuMTMwLjEwNy4xMTYiLCJhZGQiOiI5NC4xMzAuMTA3LjExNiIsInBvcnQiOiI4MDAyIiwiaWQiOiJhMWIyYzNkNC1lNWY2LTc4OTAtYWJjZC1lZjEyMzQ1Njc4OTAiLCJhaWQiOiIwIiwic2N5IjoiYXV0byIsIm5ldCI6IndzIiwidHlwZSI6Im5vbmUiLCJob3N0Ijoid3d3LmNsb3VkZmxhcmUuY29tIiwicGF0aCI6Ii8iLCJ0bHMiOiJub25lIiwic25pIjoiIiwiYWxwbiI6IiJ9
+
+## 🔒 Trojan Connection (ALTERNATIVE)
 
 # Trojan WebSocket (Direct Port 8005) - FIXED for HTTP-only
-trojan://your-strong-trojan-password-123@94.130.107.116:8005?type=ws&host=www.github.com&path=/&security=none&allowInsecure=1#Trojan-WS-HTTP-94.130.107.116 
+trojan://your-strong-trojan-password-123@94.130.107.116:8005?type=ws&host=www.github.com&path=/&security=none&allowInsecure=1#Trojan-WS-HTTP-94.130.107.116
+
+## 📊 Performance Ranking (Speed & Reliability)
+
+1. 🥇 WireGuard (51820/udp) - FASTEST, best battery life
+2. 🥈 VLESS Direct TCP (8080) - Fastest HTTP proxy
+3. 🥉 VLESS WebSocket (8003-8007) - Firewall-friendly
+4. 🏃 VMess WebSocket (8001-8002) - Legacy compatibility
+5. 🔒 Trojan WebSocket (8005) - Alternative protocol
+
+## 🚀 Quick Setup Guide
+
+### For Best Performance:
+1. Install WireGuard app
+2. Import config from ../wireguard-config/peer_client1/
+3. Connect and enjoy fastest speeds!
+
+### If WireGuard is Blocked:
+1. Install v2rayNG/v2rayN app
+2. Copy VLESS Direct TCP link above
+3. Import and connect
+
+### For Maximum Compatibility:
+- Try protocols in order listed above
+- Different hosts work better in different countries
+- Keep multiple protocols configured as backup
+
+---
+
+🔥 **Start with WireGuard for the ultimate VPN experience!** 🔥 
